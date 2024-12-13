@@ -4,3 +4,6 @@ Trekant 1:
 - Regner ut de ukjente vinklene 
 - og sidene
 - Finner arealet
+
+utvidelse a:
+Ta lengden av BC eller AC i stedet.

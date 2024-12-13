@@ -1,4 +1,4 @@
-from math import sin
+
 from helper import sin_deg
 #Trekant 1:
 # Lage et program som tar vinkel A og vinkel B og lengden AB som input
@@ -6,32 +6,41 @@ from helper import sin_deg
 
 print("Hei, du får nå noen sprørsmål angående vinklene og sidene i trekanten: ")
 
-while True:
-    try:
-        vinkel_a = float(input("Hvor stor er vinkel A? "))
+# Vi har tre vinkler i en trekant, hver med sin motstående side.
+# Vinkel A har side a, B har b og C har c, a = BC, b = AC og c = AB
 
-        if 0 < vinkel_a < 180: 
-            break
-        else:
-            print("Du skal skrive vinkelen. Den må være mellom 0 og 180 grader, prøv igjen:")
-    except ValueError as e:
-        print(f"Du må skrive inn et tall! \nError: {e}")
+# pair består av vinkel, og lengde på motstående side. 
+pair_a = [None, None]
+pair_b = [None, None]
+pait_c = []
 
-while True:
-    try: 
-        vinkel_b = float(input("Hvor stor er vinkel B? "))
+#### Fortsett her!
+def get_angle(name):
+    leftover_angle = 180
+    if pair_a[0]:
+        leftover_angle = leftover_angle - pair_a[0]
+    elif not pair_a[0] and pair_b[0]:
+        leftover_angle = leftover_angle - pair_b[0]
+    
+    while True:
+        try:
+            angle = input(f"Hvor stor en vinkel {name}? ")
 
-        if 0 < vinkel_b < 180 and vinkel_a + vinkel_b < 180:
-            break
-        else:
-            print("Vinkel mellom, 0 og 180, mulig vinklene er for store")
+            if angle =="":
+                return None
+            else:
+                angle = float(angle)
+            
+            if 0 < angle < leftover_angle: 
+                return angle
+            else:
+                print(f"Du skal skrive vinkelen til {name}. Mellom 0 og {leftover_angle} grader.")
+        except ValueError as e:
+            print(f"Du kan ikke skrive bokstaver!\nError:{e}")
 
-    except ValueError as e:
-        print(f"Du må skrive tall! \nError: {e}")
 
-
-vinkel_c = 180 - vinkel_a - vinkel_b
-print(f"Vinkel C vil være: {vinkel_c}")
+pair_a[0] = get_angle("A")
+pair_b[0] = get_angle("B")
 
 # Sjekker om input er konsistent
 
@@ -51,6 +60,10 @@ while True:
 
 # og sidene
 
+
+# Lage en funksjon som finner side bassert på
+
+
 side_bc = (side_ab * sin_deg(vinkel_a))/sin_deg(vinkel_c)
 side_ac = (side_ab * sin_deg(vinkel_b))/sin_deg(vinkel_c)
 print(f"Siden AC vil være {round(side_ac, 2)} og side BC vil være {round(side_bc, 2)}")
@@ -62,3 +75,8 @@ print(f"Siden AC vil være {round(side_ac, 2)} og side BC vil være {round(side_
 areal = 0.5 * sin_deg(vinkel_a) * side_ab * side_ac
 
 print(f"Arealet er {round(areal, 2)}")
+
+
+triangle_pair_a = (vinkel_a, side_bc)
+
+#def find_triangle_side(known_pair, unkown_pair):
