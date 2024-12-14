@@ -4,30 +4,35 @@ from helper import sin_deg
 # Lage et program som tar vinkel A og vinkel B og lengden AB som input
     # To typer input, sjekke for parametere, eller ta input.
 
-print("Hei, du får nå noen sprørsmål angående vinklene og sidene i trekanten: ")
-
 # Vi har tre vinkler i en trekant, hver med sin motstående side.
 # Vinkel A har side a, B har b og C har c, a = BC, b = AC og c = AB
 
 # pair består av vinkel, og lengde på motstående side. 
-pair_a = [None, None]
-pair_b = [None, None]
-pait_c = []
 
-#### Fortsett her!
+
+pair_a = [0, None]
+pair_b = [0, None]
+pair_c = [0, None]
+
+
 def get_angle(name):
+
+    #Lage en sjekke vinkel funksjon?
     leftover_angle = 180
-    if pair_a[0]:
-        leftover_angle = leftover_angle - pair_a[0]
-    elif not pair_a[0] and pair_b[0]:
-        leftover_angle = leftover_angle - pair_b[0]
+    if not pair_a[0] and not pair_b[0] and not pair_c[0]:
+        print("Dont have any angles yett")
+        pass
+
+    elif bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 1:
+        print("Har vinkel A, kan finne en til")
+        leftover_angle = leftover_angle - pair_a[0] - pair_b[0] - pair_c[0]
     
     while True:
         try:
             angle = input(f"Hvor stor en vinkel {name}? ")
 
             if angle =="":
-                return None
+                return 0
             else:
                 angle = float(angle)
             
@@ -38,14 +43,27 @@ def get_angle(name):
         except ValueError as e:
             print(f"Du kan ikke skrive bokstaver!\nError:{e}")
 
+print("Hei, du får nå noen sprørsmål angående vinklene og sidene i trekanten: ")
+
 
 pair_a[0] = get_angle("A")
 pair_b[0] = get_angle("B")
+pair_c[0] = get_angle("C")
 
-# Sjekker om input er konsistent
+if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
+    angle = leftover_angle - pair_a[0] - pair_b[0] - pair_c[0]
+    print(f"Setting remaining angle to {angle}")
 
+    if not pair_a[0]:
+        pair_a[0] = angle
+    elif not pair_b[0]:
+        pair_b[0] = angle
+    else:
+        pair_c[0] = angle
 
-# Regner ut de ukjente vinklene 
+print(pair_a[0], pair_b[0], pair_c[0])
+
+# Regner ut de ukjente vinklene
 while True:
     try:
         side_ab = float(input("Trenger nå lengden på side AB i trekanten: "))
@@ -64,19 +82,7 @@ while True:
 # Lage en funksjon som finner side bassert på
 
 
-side_bc = (side_ab * sin_deg(vinkel_a))/sin_deg(vinkel_c)
-side_ac = (side_ab * sin_deg(vinkel_b))/sin_deg(vinkel_c)
-print(f"Siden AC vil være {round(side_ac, 2)} og side BC vil være {round(side_bc, 2)}")
-
-
 
 # Finner arealet
-
-areal = 0.5 * sin_deg(vinkel_a) * side_ab * side_ac
-
-print(f"Arealet er {round(areal, 2)}")
-
-
-triangle_pair_a = (vinkel_a, side_bc)
 
 #def find_triangle_side(known_pair, unkown_pair):
