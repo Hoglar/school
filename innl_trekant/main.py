@@ -26,6 +26,8 @@ def get_angle(name):
     elif bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 1:
         print("Har vinkel A, kan finne en til")
         leftover_angle = leftover_angle - pair_a[0] - pair_b[0] - pair_c[0]
+    else:
+        return 0
     
     while True:
         try:
@@ -43,6 +45,38 @@ def get_angle(name):
         except ValueError as e:
             print(f"Du kan ikke skrive bokstaver!\nError:{e}")
 
+# Tar her imot pair som argumenter, så den blir mere modulær.
+def get_side(side_name, a, b, c):
+    print(a, b , c)
+    # Starter med å innhente data fra bruker. Sidene må være positive, men ingen maks grense.
+    # om jeg har 2 sider, vil den tredje kunne bli regnet ut. Kan jobbe lit med å
+    # Ta mindre input fra bruker, da jeg kan finne alt om jeg har alle vinkler
+    # Kan ta samme aproach, om jeg har 2 sider, så regner jeg ut den siste. 
+    # Må kanskje her ta hensyn til 2 løsninger for noen trekanter. 
+    while True:
+        
+        # ingen sider, da henter vi inn fra bruker og setter side. Kan sjekke at den er positiv
+        try:
+            side_value = input(f"Hva er lengden på {side_name}? ")
+            if side_value == "":
+                return 0
+            else:
+                side_value = float(side_value)
+            
+            if side_value > 0:
+                return side_value
+            else:
+                print("Noe gikk galt, skriv tall større en 0 eller enter om du ikke har tall.")
+
+        except ValueError as e:
+            print(f"Noe gikk galt, prøvde du å skrive tall med bokstaver?\nError: {e}")
+        
+
+
+
+
+
+
 print("Hei, du får nå noen sprørsmål angående vinklene og sidene i trekanten: ")
 
 
@@ -50,8 +84,10 @@ pair_a[0] = get_angle("A")
 pair_b[0] = get_angle("B")
 pair_c[0] = get_angle("C")
 
+# Finner siste vinkel om vi har 2 vinkler etter input.
+
 if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
-    angle = leftover_angle - pair_a[0] - pair_b[0] - pair_c[0]
+    angle = 180 - pair_a[0] - pair_b[0] - pair_c[0]
     print(f"Setting remaining angle to {angle}")
 
     if not pair_a[0]:
@@ -61,20 +97,13 @@ if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
     else:
         pair_c[0] = angle
 
-print(pair_a[0], pair_b[0], pair_c[0])
+print(f"Vi har vinkel A: {pair_a[0]}, B: {pair_b[0]}, C: {pair_c[0]}")
 
-# Regner ut de ukjente vinklene
-while True:
-    try:
-        side_ab = float(input("Trenger nå lengden på side AB i trekanten: "))
 
-        if side_ab > 0:
-            break
-        else:
-            print("Ikke bruk negative tall!")
-
-    except ValueError as e:
-        print(f"brukte du tall?\nError: {e}")
+# Da kan vi hente inn sider.
+pair_c[1] = get_side("AB", pair_a, pair_b, pair_c)
+pair_a[1] = get_side("BC", pair_a, pair_b, pair_c)
+pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
 
 # og sidene
 
