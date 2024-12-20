@@ -69,13 +69,7 @@ def get_side(side_name, a, b, c):
                 print("Noe gikk galt, skriv tall større en 0 eller enter om du ikke har tall.")
 
         except ValueError as e:
-            print(f"Noe gikk galt, prøvde du å skrive tall med bokstaver?\nError: {e}")
-        
-
-
-
-
-
+            print(f"Noe gikk galt prøvde du å skrive tall med bokstaver?\nError: {e}")
 
 print("Hei, du får nå noen sprørsmål angående vinklene og sidene i trekanten: ")
 
@@ -97,21 +91,11 @@ if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
     else:
         pair_c[0] = angle
 
-print(f"Vi har vinkel A: {pair_a[0]}, B: {pair_b[0]}, C: {pair_c[0]}")
-
-
 # Da kan vi hente inn sider.
 pair_c[1] = get_side("AB", pair_a, pair_b, pair_c)
 pair_a[1] = get_side("BC", pair_a, pair_b, pair_c)
 pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
 
-# og sidene
+#Nå kan vi kanskje få sider som ikke er gyldige, Kan feilsøke det litt, men trur jeg venter.
 
-
-# Lage en funksjon som finner side bassert på
-
-
-
-# Finner arealet
-
-#def find_triangle_side(known_pair, unkown_pair):
+print(pair_a, pair_b, pair_c)
