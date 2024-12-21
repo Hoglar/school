@@ -1,5 +1,7 @@
 
-from helper import sin_deg, check_pair, is_pair_done, triangle_score
+from helper import (sin_deg, check_pair, is_pair_done, 
+                    triangle_score, cosset_find_angle, check_sides,
+                    cosset_find_side)
 #Trekant 1:
 # Lage et program som tar vinkel A og vinkel B og lengden AB som input
     # To typer input, sjekke for parametere, eller ta input.
@@ -115,7 +117,8 @@ pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
 # Må utelukke noen kasuser som ikke kan løses
 
 #Må jeg ha et par? Kan hvertfall finne par, i pairs vil indexen altid vite hvem side og vinkel
-pairs =[pair_a, pair_b, pair_c]
+pairs = [pair_a, pair_b, pair_c]
+print(pairs)
 
 while True:
 
@@ -132,10 +135,31 @@ while True:
     if triangle_score(pairs) < 3:
         print("Har ikke noe informasjon, får ikke løst trekanten")
         break
-    elif check_pair(pair_a) and check_pair(pair_b) and check_pair(pair_c) == "angle":
+    elif all(check_pair(pair) in ["angle"] for pair in pairs):
         print("Har bare vinkler, kan ikke løse")
         break
 
     # Kan nå starte med matte!
+    # Hvis jeg bare har sider, finner jeg bare vinklene.
+    # Kan her ta litt error handling og tror jeg. Finnes regler her, men må utforske litt
+    if all(check_pair(pair) in ["both", "side"] for pair in pairs):
+        if check_sides(pair_a[1], pair_b[1], pair_c[1]):
+
+            pair_a[0] = cosset_find_angle(pair_a, pair_b, pair_c)
+            pair_b[0] = cosset_find_angle(pair_b, pair_a, pair_c)
+            pair_c[0] = cosset_find_angle(pair_c, pair_a, pair_b)
+            print("Skal være ferdige nå", pairs)
+        else:
+            print("Ser ikke ut som det kan finnes noen trekant med sidene du ga.")
+            break
     
 
+    # hvis pair 1 har vinkel og par 2 og 3 har side, kan vi finne side til 1
+    # Bare prøve å bruke den, enten fikser den, eller så gjør den ingenting.
+    pair_a[1] = cosset_find_side(pair_a, pair_b, pair_c)
+    pair_b[1] = cosset_find_side(pair_b, pair_a, pair_c)
+    pair_c[1] = cosset_find_side(pair_c, pair_a, pair_b)
+
+    #Kunne kanskje vært bedre her.
+
+    # Da er det igjen Sinus setningen
