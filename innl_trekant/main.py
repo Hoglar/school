@@ -1,7 +1,7 @@
 
 from helper import (sin_deg, check_pair, is_pair_done, 
                     triangle_score, cosset_find_angle, check_sides,
-                    cosset_find_side)
+                    cosset_find_side, sinset_find_side, sinset_find_angle, check_if_extra_triangle)
 #Trekant 1:
 # Lage et program som tar vinkel A og vinkel B og lengden AB som input
     # To typer input, sjekke for parametere, eller ta input.
@@ -14,6 +14,12 @@ from helper import (sin_deg, check_pair, is_pair_done,
 pair_a = [0, 0]
 pair_b = [0, 0]
 pair_c = [0, 0]
+# Sette in triangle her, bytte ut pair
+do_we_have_extra = False
+alt_a = [0, 0]
+alt_b = [0, 0]
+alt_c = [0, 0]
+alt_triangle = [alt_a, alt_b, alt_c]
 
 def get_angle(name):
 
@@ -75,6 +81,7 @@ pair_a[0] = get_angle("A")
 pair_b[0] = get_angle("B")
 pair_c[0] = get_angle("C")
 
+
 # Finner siste vinkel om vi har 2 vinkler etter input.
 
 if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
@@ -92,6 +99,8 @@ if bool(pair_a[0]) + bool(pair_b[0]) + bool(pair_c[0]) == 2:
 pair_c[1] = get_side("AB", pair_a, pair_b, pair_c)
 pair_a[1] = get_side("BC", pair_a, pair_b, pair_c)
 pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
+
+
 
 #Nå kan vi kanskje få sider som ikke er gyldige, Kan feilsøke det litt, men trur jeg venter.
 
@@ -118,17 +127,14 @@ pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
 
 #Må jeg ha et par? Kan hvertfall finne par, i pairs vil indexen altid vite hvem side og vinkel
 pairs = [pair_a, pair_b, pair_c]
-print(pairs)
 
-while True:
+alt_a[0], alt_a[1] = pair_a[0], pair_a[1]
+alt_b[:2] = pair_b[:2]
+alt_c[:2] = pair_c[:2]
+print(alt_triangle)
 
-    done_pairs = [x for x in pairs if is_pair_done(x)]
-    pairs_to_fix = [x for x in pairs if not is_pair_done(x)]
-    print(pairs_to_fix)
-
-    if len(done_pairs) == 3:
-        print("Vi er ferdige", done_pairs)
-        break
+#Hvorfor må den kjøre så mange ganger?
+for i in range(6):
 
     # End program om vi har tilfeller som ikke kan løses
     # Må ha mer en 1 side og en vinkel. Går heller ikke med 3 vinkler, 3 sider derimot er greit
@@ -148,7 +154,6 @@ while True:
             pair_a[0] = cosset_find_angle(pair_a, pair_b, pair_c)
             pair_b[0] = cosset_find_angle(pair_b, pair_a, pair_c)
             pair_c[0] = cosset_find_angle(pair_c, pair_a, pair_b)
-            print("Skal være ferdige nå", pairs)
         else:
             print("Ser ikke ut som det kan finnes noen trekant med sidene du ga.")
             break
@@ -163,3 +168,70 @@ while True:
     #Kunne kanskje vært bedre her.
 
     # Da er det igjen Sinus setningen
+    done_pairs = [x for x in pairs if is_pair_done(x)]
+
+
+    # Har to sinset funksjoner, en som returner vinkel, og en som returner side. 
+    # Den som returner vinkel må jeg være obs på. Lager side først
+    
+    pair_a[1] = sinset_find_side(pair_a, done_pairs[0])
+    pair_b[1] = sinset_find_side(pair_b, done_pairs[0])
+    pair_c[1] = sinset_find_side(pair_c, done_pairs[0])
+
+
+    # Må nå sjekke om jeg kan ha flere trekanter.
+    # Om 2 trekanter, kanskje jeg kan kjøre ny trekant gjennom samme løkke?
+    # den andre trekanten må ha infor jeg har til nå. det er resten som endres
+    # Så herfra finner jeg 2 trekanter
+
+    #Dette kan nok løses bedre
+    # Par A
+    #Om jeg klarer meg uten sin er det bra
+    if i > 1:
+        if not pair_a[0] and pair_a[1]:
+            pair_a[0] = sinset_find_angle(pair_a, done_pairs[0])
+            alt = check_if_extra_triangle(done_pairs[0], pair_a[0])
+            if alt:
+                alt_a[0] = alt
+                alt_a[1] = pair_a[1]
+                do_we_have_extra = True
+            
+        elif not pair_a[0] and not pair_a[1] and bool(pairs[0][0]) + bool(pairs[1][0]) + bool(pairs[2][0]) == 2:
+            pair_a[0] = round(180 - pairs[0][0] - pairs[1][0] - pairs[2][0], 1)
+        # Par B
+        if not pair_b[0] and pair_b[1]:
+            pair_b[0]  = sinset_find_angle(pair_b, done_pairs[0])
+            alt = check_if_extra_triangle(done_pairs[0], pair_b[0])
+            if alt:
+                alt_b[0] = alt
+                alt_b[1] = pair_a[1]
+                do_we_have_extra = True
+            
+        elif not pair_b[0] and not pair_b[1] and bool(pairs[0][0]) + bool(pairs[1][0]) + bool(pairs[2][0]) == 2:
+            pair_b[0] = round(180 - pairs[0][0] - pairs[1][0] - pairs[2][0], 1)
+        #Par C
+        if not pair_c[0] and pair_c[1]:
+            pair_c[0]  = sinset_find_angle(pair_c, done_pairs[0])
+            alt = check_if_extra_triangle(done_pairs[0], pair_c[0])
+            if alt:
+                alt_c[0] = alt
+                alt_c[1] = pair_a[1]
+                do_we_have_extra = True
+            
+        elif not pair_c[0] and not pair_c[1] and bool(pairs[0][0]) + bool(pairs[1][0]) + bool(pairs[2][0]) == 2:
+            pair_c[0] = round(180 - pairs[0][0] - pairs[1][0] - pairs[2][0], 1)
+
+
+        done_pairs = [x for x in pairs if is_pair_done(x)]
+
+    if len(done_pairs) == 3:
+        print("Vi er ferdige", done_pairs)
+        break
+
+if do_we_have_extra:
+    print("We have a extra triangle", alt_triangle)
+    
+
+
+
+    

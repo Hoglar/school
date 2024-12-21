@@ -1,4 +1,5 @@
-from math import sin, cos, radians, acos, degrees, sqrt
+from math import sin, cos, radians, acos, asin, degrees, sqrt
+import sys
 
 def sin_deg(x):
     radian = radians(x)
@@ -11,6 +12,14 @@ def cos_deg(x):
 def reverse_cos(x):
     rad_angle = acos(x)
     return degrees(rad_angle)
+
+def reverse_sin(x):
+    try:
+        rad_angle = asin(x)
+    except ValueError:
+        sys.exit("Unsolvable")
+    return degrees(rad_angle)
+
 
     
 
@@ -64,7 +73,6 @@ def cosset_find_angle(a: list, b: list, c: list) -> int:
     if not a[0]:
 
         cos_a = (pow(b[1],2) + pow(c[1], 2) - pow(a[1], 2))/(2*b[1]*c[1])
-        print(cos_a)
 
         return round(reverse_cos(cos_a), 1)
     else:
@@ -74,7 +82,37 @@ def cosset_find_angle(a: list, b: list, c: list) -> int:
 def cosset_find_side(a: list, b: list, c: list):
     if a[0] and not a[1] and b[1] and c[1]:
         side = sqrt(pow(b[1], 2) + pow(c[1], 2) - (2 * b[1] * c[1] * cos_deg(a[0])))
-        print("Setting side with cosset")
         return round(side, 1)
     else:
         return a[1]
+    
+def sinset_find_side(a: list, b:list) -> int:
+    # a har ukjent side, b er kjent
+    
+    if not a[1] and a[0]:
+        side = (b[1] * sin_deg(a[0]))/sin_deg(b[0])
+        print("Brukes denne")
+        return side
+    else:
+        return a[1]
+    # Prøve å fikse ambiguens, dette ble velidg rotete
+
+
+def sinset_find_angle(a: list, b: list):
+    
+    sin_angle = (sin_deg(b[0]) * a[1])/b[1]
+    
+    angle = round(reverse_sin(sin_angle), 1)
+    return angle
+
+    
+            
+def check_if_extra_triangle(start_angle, angle):
+
+    alt_angle = 180 - angle
+
+    if start_angle[0] >= 90:
+        return 0
+    elif alt_angle + start_angle[0] < 180:
+        return alt_angle
+
