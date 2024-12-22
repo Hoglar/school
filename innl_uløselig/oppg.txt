@@ -1,0 +1,6 @@
+Løse uløselig likning: lage et program som løser likningen e**x = 4x.
+Prøv gjerne å starte med å tenke litt selv hvordan en slik oppgave kan løses. 
+Tegn opp grafene. Kan du se hvor løsningen ca. er? 
+Hvordan kan du lage et program som prøver å finne løsningen. 
+Hvor nærme kan du komme? (Prøv å tenke selv. Ikke outsource tekningen til chatgpt. 
+Diskuter med medstudent.)

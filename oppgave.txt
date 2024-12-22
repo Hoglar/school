@@ -1,0 +1,85 @@
+Arbeidskrav i programmering (python)
+
+I læremålene for fysikk og matematikk står det at vi skal lære litt programmering. Språket er python. Det er bestemt at python er aktuelt for eksamen i matematikk (og så å si helt sikkert kommer på eksamen), men ikke i fysikk. Det skal imidlertid gjennomføres arbeidskrav i programmering både i matematikk og fysikk. 
+
+Vi skal altså lære å programmere litt python, og har arbeidskrav både i matematikk og fysikk som må godkjennes. 
+
+Vi har allerede gjort noe programmering, se miniPython. 
+Vi kommer til å arbeide mer med programmering over jul, arbeide med arbeidskravene, få de godkjent. Det vil være lurt å arbeide sammen, men alle skal skrive og forstå kode selv. 
+
+Det er den enkleste sak i verden å få chatgpt el.l. til å generere kode for slike standardoppgaver som vi skal ha. Men poenget er jo å kunne gjøre dette selv. I godkjenningsprosessen sitter vi sammen og går gjennom koden din, linje for linje, snakker om den. Så du må vite hva koden din gjør, kunne forklare. Da er det fint å ha skrevet den selv (gjerne med hjelp - læring er det viktigste). 
+
+Noen ønsker å gjøre minimalt med programmering. Andre aner (eller vet) at programmering kan være en fin mulighet til å bevege seg litt utenfor den regningen og de metodene vi vanligvis bruker, utforske litt mer, ha det litt gøy. Vi ønsker at mange vil strekke seg, være litt “ingeniører”, men forstår også at det for noen er bedre å bruke tid på mer eksamensrelatert arbeid. (Hvis du f.eks. har problemer med flytte & bytte, gange parenteser, brøkregning etc., bør du prioritere det fremfor absolutt alt annet.) 
+Vi opererer derfor med et minimumsnivå for arbeidskravene, men har også med flere “utvidelser” utover det absolutte minimum, slik at den som vil kan få utfolde seg litt. 
+
+En første versjon av oppgavene er satt opp nedenfor, men de er ikke hogd i granitt. (Vil prøve å få gjort det innen ca. 16.12.) Tanken er at du da har mulighet til å arbeide litt eller mye med programmering i den lange juleferien. Igjen: det er viktigere å ha god kontroll på mekanikken og på den matematikken vi har hatt så langt enn på programmering, så dersom du ikke har det, er det kanskje heller det du bør bruke litt av den lange juleferien på. (Men da må du gjøre nettopp det.) Eller du kan gjøre begge deler. (Og kanskje er det slik at du ikke kommer til å gjøre ren matematikk/fysikk selv om du burde, men har lyst å snuse litt på programmering, eller at du ønsker litt forandring. Da kan du iallfall gjøre det. Men igjen: matematikk og fysikk opp til ca. C bør ha høyeste prioritet.)  
+
+
+
+
+Matematikk: 
+Vil legge ut noen treningsoppgaver som viser litt av det nivået det er ønskelig at du har for eksamen. Lenke kommer her. 
+Arbeidskravene nedenfor vil du arbeide på underveis i vårsemesteret. Så langt har vi kun lært halvparten av matematikken som kreves. (Du kan allerede angripe oppg. 1-4 nedenfor, mens 5-7 trengs mer matematikkunskaper.)  
+
+
+Arbeidskrav: 
+
+
+Skrive et program som løser abc-formelen for deg: leser inn a, b og c fra tastatur (bruk input-funksjonen), regner ut løsningene og skriver ut svaret, som kan håndtere ingen løsning. 
+
+
+Trekant 1: Lage et program som tar vinkel A og vinkel B og lengden AB som input, sjekker om input er konsistent, regner ut de ukjente vinklene og sidene og finner arealet. 
+Utvidelse 1: ta lengden BC eller AC i stedet for AB. 
+Utvidelse 1b: kanskje legge alt inn i samme program og la brukeren bestemme hvilken side som legges inn. 
+(Utvidelse 1c: lage et program som også kan ta vinkel A og B eller vinkel B og C. For de veldig dedikerte.)
+Utvidelse 2: vise trekanten grafisk. (Bruk gjerne turtle-modulen.) 
+
+
+Trekant 2: Lage et program som tar lengden AB og AC, samt vinkel B som input, sjekker input er konsistent, regner ut de ukjente vinklene og sidene samt finner arealet. 
+(NB: flere mulige løsninger?) 
+
+
+Løse uløselig likning: lage et program som løser likningen ex = 4x. Prøv gjerne å starte med å tenke litt selv hvordan en slik oppgave kan løses. Tegn opp grafene. Kan du se hvor løsningen ca. er? Hvordan kan du lage et program som prøver å finne løsningen. Hvor nærme kan du komme? (Prøv å tenke selv. Ikke outsource tekningen til chatgpt. Diskuter med medstudent.) 
+
+
+Vektorregning: … to be specified … 
+Utvidelse: Lage figur som viser vektorene 
+
+
+Rekker: Lage et program som summerer de n første leddene i rekken definert ved a1 = 5, an+1 = -⅔ an og dessuten estimerer summen når n går mot uendelig. 
+Sammenlikn med teoretisk verdi. Kommenter. 
+
+
+Integrasjon: Lage et program som numerisk integrerer en funksjonen ln(x) mellom to x-verdier ved midtpunkt-regelen. X-verdiene tas som input. Sammenlikgn med teoretisk verdi for integralet. (Den kan du også regne ut.) Varier antall intervaller (som angir størrelsen på Δx) og se på resultatene. Kommenter. Hvor mange intervaller må du ha for at den numeriske integrasjonen skal komme innenfor 1/100 av den teoretiske verdien? Hva med 1/10000 eller 1 milliontedel? 
+Utvidelse 1: Tegn grafen (matplotlib) og farge grafen mellom funksjonen og x-aksen (Ikke kjempenyttig, men kan lære å tegne graf med matplotlib) 
+Utvidelse 2: Integrer f(x) - g(x) der f(x) = … og g(x) = …  Igjen: tegn figur og fargelegg mellom f(x) og g(x).  
+
+
+
+
+Fysikk: 
+
+Arbeidskrav: 
+
+To be detailed: 
+
+bl.a. 
+bevegelseslikninger 
+kollisjon 
+to klossar med snor mellom, trinse, skråplan, friksjon: finne a og S  
+skrått kast med luftmotstand 
+elastisk pendel (kap. 13.3) 
+animasjon 
+spill? 
+
+
+
+
+Frivillige ekstraoppgaver fordi det er gøy: 
+
+… kanskje er det nokre som er interessert i å programmere litt ekstra? 
+… kanskje danne eit lite team eller to? 
+… kanskje finne nokre litt kule prosjekt å samarbeide om? 
+… faglege eller berre gøye 
+
+(Då eg var på førsteåret med studia mine, satte eg entusiastisk i gang med å skulle lage eit football-manager-spel. Det rant ut i sanden, vart ikkje noko av. Men gøy var det så lenge det varte. Men … eg burde gjort det saman med nokon. Fellesprosjekt, det kan vere inspirerande.) 
