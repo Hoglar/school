@@ -20,9 +20,9 @@ alt_a = [0, 0]
 alt_b = [0, 0]
 alt_c = [0, 0]
 alt_triangle = [alt_a, alt_b, alt_c]
+done = False
 
 def get_angle(name):
-
     #Lage en sjekke vinkel funksjon?
     leftover_angle = 180
     if not pair_a[0] and not pair_b[0] and not pair_c[0]:
@@ -101,7 +101,6 @@ pair_a[1] = get_side("BC", pair_a, pair_b, pair_c)
 pair_b[1] = get_side("AC", pair_a, pair_b, pair_c)
 
 
-
 #Nå kan vi kanskje få sider som ikke er gyldige, Kan feilsøke det litt, men trur jeg venter.
 
 # Hvilke muligheter har jeg? vi dropper cos, sin og tan da vi ikke vet om trekanten er rett. 
@@ -131,7 +130,6 @@ pairs = [pair_a, pair_b, pair_c]
 alt_a[0], alt_a[1] = pair_a[0], pair_a[1]
 alt_b[:2] = pair_b[:2]
 alt_c[:2] = pair_c[:2]
-print(alt_triangle)
 
 #Hvorfor må den kjøre så mange ganger?
 for i in range(6):
@@ -158,7 +156,6 @@ for i in range(6):
             print("Ser ikke ut som det kan finnes noen trekant med sidene du ga.")
             break
     
-
     # hvis pair 1 har vinkel og par 2 og 3 har side, kan vi finne side til 1
     # Bare prøve å bruke den, enten fikser den, eller så gjør den ingenting.
     pair_a[1] = cosset_find_side(pair_a, pair_b, pair_c)
@@ -225,12 +222,38 @@ for i in range(6):
         done_pairs = [x for x in pairs if is_pair_done(x)]
 
     if len(done_pairs) == 3:
-        print("Vi er ferdige", done_pairs)
+        done = True
         break
 
 if do_we_have_extra:
-    print("We have a extra triangle", alt_triangle)
-    print("Ikke laget utregning av trekant nummer to")
+    done_pairs = [x for x in pairs if is_pair_done(x)]
+    # Vil her altid ha 2 vinkler
+
+    rem_angle = 180 - alt_a[0] - alt_b[0] - alt_c[0]
+
+    if not alt_a[0]:
+        alt_a[0] = rem_angle
+    elif not alt_b[0]:
+        alt_b[0] = rem_angle
+    else:
+        alt_c[0] = rem_angle
+
+    alt_a[1] = sinset_find_side(alt_a, done_pairs[0])
+    alt_b[1] = sinset_find_side(alt_b, done_pairs[0])
+    alt_c[1] = sinset_find_side(alt_c, done_pairs[0])
+
+# We can do areal in the end. 
+#Hvis jeg ikke finner trekanten , finner jeg ikke arealet.
+if done:
+    #0.5 * AB * AC * sin A
+    areal = round(0.5 * pair_c[1] * pair_b[1] * sin_deg(pair_a[0]), 1)
+    print(
+        f"\n\nVi har trekant medvinklene:\nA: {pair_a[0]}\nB: {pair_b[0]}\nC: {pair_c[0]}\n\n"
+        f"Sidene\nAB: {pair_c[1]}\nBC: {pair_a[1]}\nAC: {pair_b[1]}\n\n"
+        f"Med arealet: {areal}"
+     )
+    if do_we_have_extra:
+        print(f"Vi har og en ekstra trekant: {alt_triangle}")
 
     
 

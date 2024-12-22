@@ -10,14 +10,17 @@ def cos_deg(x):
     return cos(radian)
 
 def reverse_cos(x):
-    rad_angle = acos(x)
+    try:
+        rad_angle = acos(x)
+    except ValueError:
+        sys.exit("Ikke løsbar")
     return degrees(rad_angle)
 
 def reverse_sin(x):
     try:
         rad_angle = asin(x)
     except ValueError:
-        sys.exit("Unsolvable")
+        sys.exit("Ikke løsbar")
     return degrees(rad_angle)
 
 
