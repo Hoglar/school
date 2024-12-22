@@ -230,6 +230,13 @@ for i in range(6):
 
 if do_we_have_extra:
     print("We have a extra triangle", alt_triangle)
+    print("Ikke laget utregning av trekant nummer to")
+
+    
+
+
+
+
     
 
 

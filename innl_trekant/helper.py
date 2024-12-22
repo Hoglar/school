@@ -64,8 +64,6 @@ def check_sides(a:int, b:int, c:int) -> bool:
         return False
 
 
-
-
 # Cosinussetingen for vinkler
 # Viktig å putte in par du vil finne i a, de to andre kan gå der de vil. 
 def cosset_find_angle(a: list, b: list, c: list) -> int:
@@ -91,8 +89,7 @@ def sinset_find_side(a: list, b:list) -> int:
     
     if not a[1] and a[0]:
         side = (b[1] * sin_deg(a[0]))/sin_deg(b[0])
-        print("Brukes denne")
-        return side
+        return round(side, 1)
     else:
         return a[1]
     # Prøve å fikse ambiguens, dette ble velidg rotete
@@ -101,7 +98,6 @@ def sinset_find_side(a: list, b:list) -> int:
 def sinset_find_angle(a: list, b: list):
     
     sin_angle = (sin_deg(b[0]) * a[1])/b[1]
-    
     angle = round(reverse_sin(sin_angle), 1)
     return angle
 
