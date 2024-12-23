@@ -2,6 +2,8 @@
 from helper import (sin_deg, check_pair, is_pair_done, 
                     triangle_score, cosset_find_angle, check_sides,
                     cosset_find_side, sinset_find_side, sinset_find_angle, check_if_extra_triangle)
+from turtle_paint import draw_triangle
+
 #Trekant 1:
 # Lage et program som tar vinkel A og vinkel B og lengden AB som input
     # To typer input, sjekke for parametere, eller ta input.
@@ -252,8 +254,14 @@ if done:
         f"Sidene\nAB: {pair_c[1]}\nBC: {pair_a[1]}\nAC: {pair_b[1]}\n\n"
         f"Med arealet: {areal}"
      )
+    
     if do_we_have_extra:
         print(f"Vi har og en ekstra trekant: {alt_triangle}")
+
+    visual = input("Hvis du vil se visuelt eksempel skriv y: ")
+    if visual == "y":
+        draw_triangle(pair_a, pair_b, pair_c)
+    
 
     
 
