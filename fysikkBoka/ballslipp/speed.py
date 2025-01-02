@@ -7,15 +7,23 @@ data = np.loadtxt('ballslipp.txt')
 t = data[:,0]
 s = data[:, 1]
 
-# Tegner posisjonsgrafen
+n = len(t)
+v = np.zeros(n)
+
+# Beregne fart
+
+for i in range(1, n):
+    v[i] = (s[i]-s[i-1])/(t[i]-t[i-1])
+
+# Tegner fartsgrafen
 
 plt.figure(1)
-plt.plot(t, s)
+plt.plot(t, v)
 plt.grid()
-plt.title("Posisjon")
+plt.title("Fart")
 
 plt.xlabel("$t$ / s")
-plt.ylabel("$s$ / m")
+plt.ylabel("$v$ / m/s")
 
 
 
